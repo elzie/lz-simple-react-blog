@@ -1,6 +1,8 @@
 import React from 'react';
 import { PageHeader } from 'antd';
 import Post from './Post';
+import api from '../mock_api';
+import _ from 'lodash';
 
 function Posts(props) {
     return (
@@ -12,7 +14,13 @@ function Posts(props) {
                 />
             </div>
             <div className="articles_container">
-                <Post />
+                {
+                    _.map(api, (article) => {
+                        return (
+                            <Post />
+                        )
+                    })
+                }
             </div>
         </div>
     )
