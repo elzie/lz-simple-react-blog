@@ -10,7 +10,7 @@ const Post = (props) => {
                 title={props.title}
                 extra={<a href="#">More</a>}
             >
-                <p>
+                <p className="article_content">
                     {props.content}
                 </p>
             </Card>

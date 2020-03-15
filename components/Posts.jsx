@@ -15,12 +15,18 @@ function Posts(props) {
             </div>
             <div className="articles_container">
                 {
-                    _.map(api, (article) => {
-                        // { console.log(article) }
-                        return (
-                            <Post title={article.title} content={article.content} />
-                        )
-                    })
+                    // Option 1
+                    // _.map(api, (article) => {
+                    //     // { console.log(article) }
+                    //     return (
+                    //         <Post title={article.title} content={article.content} />
+                    //     )
+                    // })
+
+                    //Option 2 - implicit return
+                    _.map(api, (article) => (
+                        <Post title={article.title} content={article.content} />
+                    ))
                 }
             </div>
         </div>
