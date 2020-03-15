@@ -5,15 +5,19 @@ if (module.hot) {
     module.hot.accept()
 }
 
+//React component
 const App = (props) => {
     return (
-        <div>hello react world</div>
+        <div>
+            <h1>Welcome {props.name}</h1>
+            This is the way
+        </div>
     )
 }
 
 var rootElement = document.getElementById('root')
 
 ReactDOM.render(
-    <App />,
+    <App name={'elzie'} />,
     rootElement
 )
