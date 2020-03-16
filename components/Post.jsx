@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PageHeader, Card } from 'antd';
 import api from '../mock_api';
+import db from '../firebase';
 
 const Post = (props) => {
 
@@ -12,10 +13,23 @@ const Post = (props) => {
 
     //useEffect runs before component get rendered
     useEffect(() => {
-        let post = api[props.id]
+        let postRef = db
+            .collection('blog-posts')
+            .doc(props.id);
+
+        postRef
+            .get()
+            .then(doc => {
+                let { title, content } = doc.data();
+                //console.log(data);
+                setTitle(title);
+                setContent(content);
+            });
+
+        // let post = api[props.id]
         // console.log('Post:', post);
-        setTitle(post.title);
-        setContent(post.content);
+        // setTitle(post.title);
+        // setContent(post.content);
     }, []);
     //passed a blank array for updating further on
 

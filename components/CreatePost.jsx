@@ -34,6 +34,7 @@ const CreatePost = (props) => {
             content
         }
         // console.log(payload);
+        // console.log(content);
 
         // Save to DB and show blog-post ID(doc.id)
         postRef.add(payload).then(function (doc) {
