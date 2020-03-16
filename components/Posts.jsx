@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PageHeader } from 'antd';
 import PostSnippet from './PostSnippet';
-import api from '../mock_api';
+// import api from '../mock_api';
 import _ from 'lodash';
 import db from '../firebase';
 
@@ -21,7 +21,7 @@ function Posts(props) {
                     let { id } = post;
                     // Ex. ^ get { id, name, etc } from 'post'
 
-                    console.log('thePost: ', id, data);
+                    // console.log('thePost: ', id, data);
 
                     // Modify and add the id
                     let payload = {
@@ -29,7 +29,7 @@ function Posts(props) {
                         ...data
                         // ... Spread operator, spreads how many any keys into the object
                     }
-                    console.log('payload: ', payload);
+                    // console.log('payload: ', payload);
 
                     // Set data into our collection, with concatination(add something to the collection)
                     setPosts((posts) => [...posts, payload]);
