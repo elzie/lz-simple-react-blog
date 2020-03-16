@@ -1,6 +1,8 @@
 import React from 'react';
 import Posts from './Posts';
 import Post from './Post';
+import CreatePost from './CreatePost';
+
 import { Router } from '@reach/router';
 
 function App(props) {
@@ -9,7 +11,8 @@ function App(props) {
             <h1>Welcome {props.name}</h1>
             This is the way..
             <Router>
-                <Posts default />
+                <CreatePost default />
+                <Posts path="posts" />
                 <Post path="post/:id" />
             </Router>
         </div>

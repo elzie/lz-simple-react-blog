@@ -12,9 +12,13 @@ const PostSnippet = (props) => {
                 title={props.title}
                 extra={<Link to={`/post/${props.id}`}>Read Full Article</Link>}
             >
-                <p className="post_snippet_content">
-                    {props.content}
-                </p>
+                <div className="post_snippet_content">
+                    {
+                        props.content.split('\n').map((paragraph, idx) => {
+                            return <p key={idx}>{paragraph}</p>;
+                        })
+                    }
+                </div>
             </Card>
         </div>
     )

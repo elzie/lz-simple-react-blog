@@ -4,7 +4,8 @@ import api from '../mock_api';
 
 const Post = (props) => {
 
-    console.log(props);
+    // console.log(props);
+
     //State management
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -12,10 +13,11 @@ const Post = (props) => {
     //useEffect runs before component get rendered
     useEffect(() => {
         let post = api[props.id]
-        console.log('Post:', post);
+        // console.log('Post:', post);
         setTitle(post.title);
         setContent(post.content);
-    });
+    }, []);
+    //passed a blank array for updating further on
 
 
     return (
