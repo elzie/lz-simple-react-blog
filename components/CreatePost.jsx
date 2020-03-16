@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { PageHeader, Input, Button } from 'antd';
 const { TextArea } = Input;
+import { Navigate, navigate } from '@reach/router';
+
 import db from '../firebase';
 
 const CreatePost = (props) => {
@@ -40,6 +42,13 @@ const CreatePost = (props) => {
         postRef.add(payload).then(function (doc) {
             console.log('Document successfully written!', doc.id);
         });
+
+        // After post created, clear title and content input
+        setTitle('');
+        setContent('');
+
+        // Send user back to Posts page
+        navigate(`/posts`);
     }
 
     return (
