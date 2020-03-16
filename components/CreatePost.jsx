@@ -20,8 +20,25 @@ const CreatePost = (props) => {
     }
 
     const onCreatePost = () => {
-        console.log('Create Post:', title, content);
+        // console.log('Create Post:', title, content);
+        // Create firebase storage
+        let postRef = db.collection('blog-posts');
 
+        // let payload = {
+        //     post_title: title, 
+        //     post_content: content
+        // }
+        // same as (if Key and Value are the same)
+        let payload = {
+            title,
+            content
+        }
+        // console.log(payload);
+
+        // Save to DB and show blog-post ID(doc.id)
+        postRef.add(payload).then(function (doc) {
+            console.log('Document successfully written!', doc.id);
+        });
     }
 
     return (
