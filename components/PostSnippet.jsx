@@ -4,6 +4,9 @@ import { Link } from '@reach/router';
 
 
 const PostSnippet = (props) => {
+
+
+
     return (
         <div className="post_snippet_container">
             <Card
@@ -13,8 +16,10 @@ const PostSnippet = (props) => {
                 extra={
                     <div className="post_snippet_links">
                         <Link to={`/post/${props.id}`} style={{ marginRight: '15px' }}>Read Full Article</Link>
-
-                        <Link to={`/update_post/${props.id}`}>Edit</Link>
+                        {props.user &&
+                            <Link to={`/update_post/${props.id}`}>Edit</Link>
+                            // Only visible to logged in users
+                        }
                     </div>
                 }
             >

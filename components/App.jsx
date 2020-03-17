@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Posts from './Posts';
 import Post from './Post';
 import CreatePost from './CreatePost';
@@ -10,10 +10,41 @@ import { Router, Link } from '@reach/router';
 import { Menu } from 'antd';
 import {
     UnorderedListOutlined,
-    HighlightOutlined
+    HighlightOutlined,
+    LogoutOutlined,
+    LoginOutlined
 } from '@ant-design/icons';
+import { auth } from '../firebase';
 
 function App(props) {
+
+    const [user, setUser] = useState(false);
+
+
+
+    auth.onAuthStateChanged(function (user) {
+        if (user) {
+            // User signed in.
+            console.log('User is signed in.', user);
+            setUser(user);
+        } else {
+            // No user signed in.
+            console.log('No user signed in.');
+        }
+    });
+
+    const onSignOut = () => {
+        console.log('signing out...');
+
+        auth.signOut().then(function () {
+            // Sign-out successfull.
+            console.log('User signed out.');
+            setUser(false);
+        }).catch(function () {
+            // An error happened.
+        });
+    }
+
     return (
         <div className="app_container">
             <h1>Welcome {props.name}</h1>
@@ -28,12 +59,36 @@ function App(props) {
                             Posts
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="create_post">
-                        <HighlightOutlined />
-                        <Link to="/create_post/:id">
-                            Create Post
+
+                    {user &&
+                        <Menu.Item key="create_post">
+                            <HighlightOutlined />
+                            <Link to="/create_post/:id">
+                                Create Post
                         </Link>
-                    </Menu.Item>
+                        </Menu.Item>
+                        // (user &&) IF statement with only one condition to be met
+                    }
+
+
+                    {!user
+                        ?
+                        <Menu.Item key="sign_in" style={{ float: 'right' }}>
+                            <LoginOutlined />
+                            <Link to="/sign_in" style={{ float: 'right' }}>
+                                Sign In
+                            </Link>
+                        </Menu.Item>
+                        :
+                        <Menu.Item key="sign_out" style={{ float: 'right' }}>
+                            <LogoutOutlined />
+                            <div onClick={onSignOut} style={{ float: 'right' }}>
+                                Sign OUT
+                            </div>
+                        </Menu.Item>
+                        // Basically an IF statement
+                    }
+
 
                 </Menu>
             </div>
@@ -41,7 +96,7 @@ function App(props) {
             <Router>
                 <SignIn path="sign_in" default />
                 <SignUp path="sign_up" />
-                <Posts path="posts" />
+                <Posts path="posts" user={user} />
                 <Post path="post/:id" />
                 <CreatePost path="create_post" />
                 <UpdatePost path="update_post/:id" />

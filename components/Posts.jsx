@@ -6,7 +6,6 @@ import _ from 'lodash';
 import db from '../firebase';
 
 function Posts(props) {
-
     // Retrieve posts from firestore db
     const [posts, setPosts] = useState([]);
 
@@ -75,7 +74,8 @@ function Posts(props) {
                             title={_.capitalize(article.title)}
                             content={
                                 article.content.substring(0, 1000)
-                            } />
+                            }
+                            user={props.user} />
                     )).reverse()
                 }
             </div>
