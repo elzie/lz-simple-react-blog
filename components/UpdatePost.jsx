@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PageHeader, Input, Button } from 'antd';
 const { TextArea } = Input;
 import { navigate } from '@reach/router';
 
 import db from '../firebase';
 
-const CreatePost = (props) => {
+const UpdatePost = (props) => {
 
     // Grab input information event stuff
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+
+    useEffect(() => {
+        let postRef = db
+            .collection('blog-posts')
+            .doc(props.id);
+
+        postRef
+            .get()
+            .then(doc => {
+                let { title, content } = doc.data();
+                //console.log(data);
+                setTitle(title);
+                setContent(content);
+            });
+
+        // let post = api[props.id]
+        // console.log('Post:', post);
+        // setTitle(post.title);
+        // setContent(post.content);
+    }, []);
 
     const onTitleChange = (event) => {
         // console.log(event.target.value);
@@ -21,10 +41,11 @@ const CreatePost = (props) => {
         setContent(event.target.value);
     }
 
-    const onCreatePost = () => {
+    const onUpdatePost = () => {
         // console.log('Create Post:', title, content);
-        // Create firebase storage
-        let postRef = db.collection('blog-posts');
+
+        // edit the post with the id
+        let postRef = db.collection('blog-posts').doc(props.id);
 
         // let payload = {
         //     post_title: title, 
@@ -38,14 +59,10 @@ const CreatePost = (props) => {
         // console.log(payload);
         // console.log(content);
 
-        // Save to DB and show blog-post ID(doc.id)
-        postRef.add(payload).then(function (doc) {
-            console.log('Document successfully written!', doc.id);
+        // UPDATE the blog-post
+        postRef.update(payload).then(function () {
+            console.log('Document updated!');
         });
-
-        // After post created, clear title and content input
-        setTitle('');
-        setContent('');
 
         // Send user back to Posts page
         navigate(`/posts`);
@@ -84,11 +101,11 @@ const CreatePost = (props) => {
                     </div>
                 </div>
                 <div className="post_input_button">
-                    <Button type="primary" size="large" onClick={onCreatePost}>Create Post</Button>
+                    <Button type="primary" size="large" onClick={onUpdatePost}>Update Post</Button>
                 </div>
             </div>
         </div>
     )
 }
 
-export default CreatePost;
+export default UpdatePost;

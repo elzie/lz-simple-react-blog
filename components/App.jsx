@@ -2,6 +2,9 @@ import React from 'react';
 import Posts from './Posts';
 import Post from './Post';
 import CreatePost from './CreatePost';
+import UpdatePost from './UpdatePost';
+import SignUp from './SignUp';
+import SignIn from './SignIn';
 
 import { Router, Link } from '@reach/router';
 import { Menu } from 'antd';
@@ -27,7 +30,7 @@ function App(props) {
                     </Menu.Item>
                     <Menu.Item key="create_post">
                         <HighlightOutlined />
-                        <Link to="/create_post">
+                        <Link to="/create_post/:id">
                             Create Post
                         </Link>
                     </Menu.Item>
@@ -36,9 +39,12 @@ function App(props) {
             </div>
 
             <Router>
-                <Posts path="posts" default />
+                <SignIn path="sign_in" default />
+                <SignUp path="sign_up" />
+                <Posts path="posts" />
                 <Post path="post/:id" />
                 <CreatePost path="create_post" />
+                <UpdatePost path="update_post/:id" />
             </Router>
         </div>
     )

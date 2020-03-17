@@ -76,7 +76,7 @@ function Posts(props) {
                             content={
                                 article.content.substring(0, 1000)
                             } />
-                    ))
+                    )).reverse()
                 }
             </div>
         </div>

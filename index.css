@@ -30,3 +30,9 @@ body {
 .app_main_navigation {
     margin-bottom: 20px;
 }
+
+.sign_up_container_inputs,
+.sign_up_input_container,
+.post_input_button {
+    margin-top: 20px;
+}
