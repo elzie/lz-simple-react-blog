@@ -6,7 +6,7 @@ import UpdatePost from './UpdatePost';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
 
-import { Router, Link } from '@reach/router';
+import { Router, Link, navigate } from '@reach/router';
 import { Menu } from 'antd';
 import {
     UnorderedListOutlined,
@@ -43,11 +43,13 @@ function App(props) {
         }).catch(function () {
             // An error happened.
         });
+        navigate('/');
     }
 
     return (
         <div className="app_container">
-            <h1>Welcome {props.name}</h1>
+            <h1>Welcome {user &&
+                user.email}</h1>
             This is the way..
 
             <div className="app_main_navigation">
@@ -63,7 +65,7 @@ function App(props) {
                     {user &&
                         <Menu.Item key="create_post">
                             <HighlightOutlined />
-                            <Link to="/create_post/:id">
+                            <Link to="/create_post">
                                 Create Post
                         </Link>
                         </Menu.Item>
@@ -97,9 +99,9 @@ function App(props) {
                 <SignIn path="sign_in" default />
                 <SignUp path="sign_up" />
                 <Posts path="posts" user={user} />
-                <Post path="post/:id" />
-                <CreatePost path="create_post" />
-                <UpdatePost path="update_post/:id" />
+                <Post path="post/:id" user={user} />
+                <CreatePost path="create_post" user={user} />
+                <UpdatePost path="update_post/:id" user={user} />
             </Router>
         </div>
     )

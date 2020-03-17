@@ -24,7 +24,7 @@ const CreatePost = (props) => {
     const onCreatePost = () => {
         // console.log('Create Post:', title, content);
         // Create firebase storage
-        let postRef = db.collection('blog-posts');
+        let postRef = db.collection('blog-users').doc(props.user.uid).collection('blog-posts');
 
         // let payload = {
         //     post_title: title, 

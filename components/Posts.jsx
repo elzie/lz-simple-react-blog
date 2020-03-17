@@ -10,32 +10,48 @@ function Posts(props) {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        let postsRef = db.collection('blog-posts');
+        let postsRef = db.collection('blog-users').doc(props.user.uid).collection('blog-posts');
 
-        postsRef
-            .get()
-            .then(posts => {
-                posts.forEach(post => {
-                    let data = post.data();
-                    let { id } = post;
-                    // Ex. ^ get { id, name, etc } from 'post'
+        // postsRef
+        //     .get()
+        //     .then(posts => {
+        //         posts.forEach(post => {
+        //             let data = post.data();
+        //             let { id } = post;
+        //             // Ex. ^ get { id, name, etc } from 'post'
 
-                    // console.log('thePost: ', id, data);
+        //             // console.log('thePost: ', id, data);
 
-                    // Modify and add the id
-                    let payload = {
-                        id,
-                        ...data
-                        // ... Spread operator, spreads how many any keys into the object
-                    }
-                    // console.log('payload: ', payload);
+        //             // Modify and add the id
+        //             let payload = {
+        //                 id,
+        //                 ...data
+        //                 // ... Spread operator, spreads how many any keys into the object
+        //             }
+        //             // console.log('payload: ', payload);
 
-                    // Set data into our collection, with concatination(add something to the collection)
-                    setPosts((posts) => [...posts, payload]);
-                    // "whatever was in 'posts', leave it there - but add 'payload' as a new one."
-                });
-            });
+        //             // Set data into our collection, with concatination(add something to the collection)
+        //             setPosts((posts) => [...posts, payload]);
+        //             // "whatever was in 'posts', leave it there - but add 'payload' as a new one."
+        //         });
+        //     });
         // querySnapshot(posts) is basically 'all of our Data'. Similar to .map
+        postsRef.onSnapshot(async posts => {
+            // Realtime updates from DB
+            let postsData = await posts.docs.map(post => {
+                let data = post.data();
+                let { id } = post;
+
+                let payload = {
+                    id,
+                    ...data
+                }
+                return payload;
+            });
+            console.log(postsData);
+            setPosts(postsData);
+        });
+
     }, []);
 
     return (

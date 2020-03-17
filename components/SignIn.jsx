@@ -65,7 +65,7 @@ const SignIn = (props) => {
                     </div>
                 </div>
                 <div style={{ float: 'left', marginTop: '20px' }}>
-                    Don't have an account? <a href="#">Sign up here!</a>
+                    Don't have an account? <a href="/sign_up">Sign up here!</a>
                 </div>
                 <div className="post_input_button">
 

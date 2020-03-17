@@ -13,6 +13,7 @@ const UpdatePost = (props) => {
 
     useEffect(() => {
         let postRef = db
+            .collection('blog-users').doc(props.user.uid)
             .collection('blog-posts')
             .doc(props.id);
 
@@ -45,7 +46,7 @@ const UpdatePost = (props) => {
         // console.log('Create Post:', title, content);
 
         // edit the post with the id
-        let postRef = db.collection('blog-posts').doc(props.id);
+        let postRef = db.collection('blog-users').doc(props.user.uid).collection('blog-posts').doc(props.id);
 
         // let payload = {
         //     post_title: title, 

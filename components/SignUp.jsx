@@ -14,7 +14,7 @@ const SignUp = (props) => {
     }
 
     const onSignUp = () => {
-        console.log('Sign up data: ', email, password);
+        // console.log('Sign up data: ', email, password);
 
         auth.createUserWithEmailAndPassword(email, password)
             .catch(function () {
@@ -65,7 +65,7 @@ const SignUp = (props) => {
                     </div>
                 </div>
                 <div style={{ float: 'left', marginTop: '20px' }}>
-                    Allready have an account? <a href="#">Sign in here!</a>
+                    Allready have an account? <a href="/sign_in">Sign in here!</a>
                 </div>
                 <div className="post_input_button">
                     <Button type="primary" size="large" onClick={onSignUp}>Sign Up</Button>
