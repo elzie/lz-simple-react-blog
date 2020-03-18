@@ -41,7 +41,7 @@ function App(props) {
         }).catch(function () {
             // An error happened.
         });
-        navigate('/');
+        // navigate('/');
     }
 
     return (
