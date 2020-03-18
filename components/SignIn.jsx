@@ -15,18 +15,28 @@ const SignIn = (props) => {
     const onPasswordChange = (event) => {
         setPassword(event.target.value);
     }
+    const [user, setUser] = useState(false);
+    auth.onAuthStateChanged(function (user) {
+        if (user) {
+            // User signed in.
+            console.log('User is signed in.', user);
+            setUser(user);
+            navigate(`/blogs/${user.uid}/posts`);
+        } else {
+            // No user signed in.
+            console.log('No user signed in.');
+        }
+    });
     const onSignIn = () => {
 
         auth.signInWithEmailAndPassword(email, password)
             .then(function (result) {
                 console.log('You signed in! :)')
                 // result.user.tenantId should be 'TENANT_PROJECT_ID'.
-                navigate(`/posts`);
-
             }).catch(function (error) {
                 // Handle error.
                 console.log('error in signin: ', error);
-            })
+            });
         // setEmail((''));
         // setPassword('');
     }
@@ -65,7 +75,7 @@ const SignIn = (props) => {
                     </div>
                 </div>
                 <div style={{ float: 'left', marginTop: '20px' }}>
-                    Don't have an account? <a href="/sign_up">Sign up here!</a>
+                    Don't have an account? <a href="sign_up">Sign up here!</a>
                 </div>
                 <div className="post_input_button">
 

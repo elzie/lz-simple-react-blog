@@ -14,6 +14,8 @@ const Post = (props) => {
     //useEffect runs before component get rendered
     useEffect(() => {
         let postRef = db
+            .collection('blog-users')
+            .doc(props.uid)
             .collection('blog-posts')
             .doc(props.id);
 

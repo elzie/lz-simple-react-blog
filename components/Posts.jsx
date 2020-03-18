@@ -10,7 +10,10 @@ function Posts(props) {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        let postsRef = db.collection('blog-users').doc(props.user.uid).collection('blog-posts');
+
+        let userId = props?.user.uid ? props.user.uid : props.uid;
+
+        let postsRef = db.collection('blog-users').doc(userId).collection('blog-posts');
 
         // postsRef
         //     .get()
@@ -91,7 +94,8 @@ function Posts(props) {
                             content={
                                 article.content.substring(0, 1000)
                             }
-                            user={props.user} />
+                            user={props.user}
+                            uid={props.uid} />
                     )).reverse()
                 }
             </div>
