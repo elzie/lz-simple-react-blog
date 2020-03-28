@@ -3,13 +3,13 @@ import firebase from 'firebase';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "AIzaSyCpEMiW9X5bSwbYLmQQ2KXevqsratKrWb8",
-    authDomain: "sandbox-4b692.firebaseapp.com",
-    databaseURL: "https://sandbox-4b692.firebaseio.com",
-    projectId: "sandbox-4b692",
-    storageBucket: "sandbox-4b692.appspot.com",
-    messagingSenderId: "271700242137",
-    appId: "1:271700242137:web:ba314a9c00f9f02e4958c8"
+    apiKey: "AIzaSyDStshVjtIAAr6hs7djh2QEoU7COujp6dY",
+    authDomain: "lz-reactjs-blog.firebaseapp.com",
+    databaseURL: "https://lz-reactjs-blog.firebaseio.com",
+    projectId: "lz-reactjs-blog",
+    storageBucket: "lz-reactjs-blog.appspot.com",
+    messagingSenderId: "385028209479",
+    appId: "1:385028209479:web:48a2bd7b4485be0680ea62"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
